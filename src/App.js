@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
 
-function App() {
+const Slider = () => {
+  const photos = [
+    "./img/photo1.jpg",
+    "./img/photo2.jpg",
+    "./img/photo3.jpg",
+    "./img/photo4.jpg",
+  ];
+
+  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
+
+  const goToPreviousPhoto = () => {
+    if (currentPhotoIndex === 0) {
+      setCurrentPhotoIndex(photos.length - 1);
+    } else {
+      setCurrentPhotoIndex(currentPhotoIndex - 1);
+    }
+  };
+
+  const goToNextPhoto = () => {
+    if (currentPhotoIndex === photos.length - 1) {
+      setCurrentPhotoIndex(0);
+    } else {
+      setCurrentPhotoIndex(currentPhotoIndex + 1);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h2>Слайдер фотографий</h2>
+      <button onClick={goToPreviousPhoto}>Назад</button>
+      <img
+        src={process.env.PUBLIC_URL + photos[currentPhotoIndex]}
+        alt="Slider"
+      />
+      <button onClick={goToNextPhoto}>Далее</button>
     </div>
   );
-}
+};
 
-export default App;
+export default Slider;
